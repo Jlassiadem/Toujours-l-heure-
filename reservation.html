@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EliteVTC - Réservation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/reservation.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-car"></i>
+                    <span>Elite<span>VTC</span></span>
+                </div>
+                <nav>
+                    <a href="index.html">Accueil</a>
+                    <a href="products.html">Véhicules</a>
+                    <a href="reservation.html">Réserver</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="form-container">
+            <form id="reservationForm">
+                <div class="form-columns">
+                    <!-- Left Column - Personal Info -->
+                    <div class="form-column personal-column">
+                        <div class="form-section personal-info">
+                            <h2><i class="fas fa-user-tie mr-2"></i>Informations personnelles</h2>
+                            
+                            <div class="form-group">
+                                <label for="cin"><i class="fas fa-id-card mr-1"></i>CIN*</label>
+                                <input type="text" id="cin" required placeholder="AB123456">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="fullName"><i class="fas fa-user mr-1"></i>Nom complet*</label>
+                                <input type="text" id="fullName" required placeholder="Jean Dupont">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phone"><i class="fas fa-phone mr-1"></i>Téléphone*</label>
+                                <input type="tel" id="phone" required placeholder="06 12 34 56 78">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email"><i class="fas fa-envelope mr-1"></i>Email (optionnel)</label>
+                                <input type="email" id="email" placeholder="jean@exemple.com">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column - Vehicle Info -->
+                    <div class="form-column vehicle-column">
+                        <div class="form-section vehicle-info">
+                            <h2><i class="fas fa-car mr-2"></i>Détails de location</h2>
+                            
+                            <div class="form-group">
+                                <label><i class="fas fa-car-side mr-1"></i>Véhicule</label>
+                                <input type="text" id="selectedVehicle" readonly class="vehicle-display">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label><i class="fas fa-calendar-day mr-1"></i>Date et heure</label>
+                                <div class="datetime-group">
+                                    <input type="date" id="date" required>
+                                    <input type="time" id="time" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label><i class="fas fa-clock mr-1"></i>Type de location</label>
+                                <div class="toggle-group">
+                                    <button type="button" class="toggle-btn active" data-mode="km">Par Kilomètres</button>
+                                    <button type="button" class="toggle-btn" data-mode="hour">Par Heures</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Dynamic Input Container -->
+                            <div id="dynamicInputContainer">
+                                <!-- KM Mode -->
+                                <div class="form-group" id="kmInputGroup">
+                                    <label><i class="fas fa-road mr-1"></i>Distance (km)</label>
+                                    <div class="range-input-group">
+                                        <input type="range" id="distanceRange" min="1" max="500" value="50">
+                                        <input type="number" id="distance" min="1" value="50">
+                                    </div>
+                                </div>
+                                
+                                <!-- Hour Mode -->
+                                <div class="form-group hidden" id="hourInputGroup">
+                                    <label><i class="fas fa-hourglass-half mr-1"></i>Durée (heures)</label>
+                                    <input type="number" id="hours" min="1" step="0.5" value="1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Confirmation Section -->
+                        <div class="confirmation-section">
+                            <div class="fee-display">
+                                <span>Total estimé:</span>
+                                <span id="fee">0€</span>
+                            </div>
+                            <button type="submit" class="submit-btn">
+                                <i class="fas fa-check-circle mr-2"></i>Confirmer la réservation
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <script src="js/reservation.js"></script>
+</body>
+</html>
