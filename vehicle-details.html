@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EliteVTC - Détails du Véhicule</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/vehicle-details.css">
+</head>
+<body>
+    <header>
+        <div class="container" style="padding-top: 0.75rem; padding-bottom: 0.75rem; display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; align-items: center;">
+                <i class="fas fa-car" style="font-size: 1.875rem; color: #2563eb; margin-right: 0.5rem;"></i>
+                <span style="font-size: 1.5rem; font-weight: 700; color: #2563eb;">Elite<span style="color: #1f2937;">VTC</span></span>
+            </div>
+            <button id="menu-toggle" style="font-size: 1.5rem; display: block;">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <main style="padding-top: 5rem;">
+        <section class="vehicle-details">
+            <div class="container">
+                <a href="products.html" class="back-btn">
+                    <i class="fas fa-arrow-left"></i> Retour à la flotte
+                </a>
+
+                <h1 id="vehicle-name">Chargement...</h1>
+                <p id="vehicle-description"></p>
+
+                <div class="gallery-container">
+                    <div class="main-image-container">
+                        <img id="main-image" src="" alt="Vehicle Image" class="main-image">
+                    </div>
+                    <div class="thumbnails" id="thumbnail-container"></div>
+                </div>
+
+                <div class="specs-grid">
+                    <div class="spec-item">
+                        <i class="fas fa-users"></i>
+                        <span id="vehicle-passengers"></span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-suitcase"></i>
+                        <span id="vehicle-bags"></span>
+                    </div>
+                </div>
+
+                <a id="reserve-btn" href="#" class="reservation-btn">
+                    Réserver ce véhicule
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/vehicle-details.js"></script>
+</body>
+</html>
