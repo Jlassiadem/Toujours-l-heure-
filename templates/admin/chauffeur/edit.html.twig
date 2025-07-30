@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Chauffeur{% endblock %}
+
+{% block body %}
+    <h1>Edit Chauffeur</h1>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button class="btn">{{ button_label|default('Update') }}</button>
+    {{ form_end(form) }}
+
+    <a href="{{ path('app_chauffeur_indexad') }}">back to list</a>
+
+    {{ include('admin/chauffeur/_delete_form.html.twig') }}
+{% endblock %}

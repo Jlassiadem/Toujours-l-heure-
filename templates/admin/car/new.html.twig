@@ -1,0 +1,411 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create New Car{% endblock %}
+
+{% block stylesheets %}
+    <!-- Material Dashboard CSS -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700,900" />
+    <link href="{{ asset('assetad/css/nucleo-icons.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assetad/css/nucleo-svg.css') }}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link id="pagestyle" href="{{ asset('assetad/css/material-dashboard.css?v=3.2.0') }}" rel="stylesheet" />
+    <style>
+        :root {
+            --primary-color: #00B98E;
+            --primary-hover: #00a57d;
+            --primary-light: rgba(0, 185, 142, 0.1);
+            --gradient-primary: linear-gradient(195deg, #00B98E 0%, #008a6a 100%);
+        }
+        
+        .bg-gradient-primary {
+            background: var(--gradient-primary) !important;
+        }
+        
+        .btn-primary, .bg-primary {
+            background-color: var(--primary-color) !important;
+            border-color: var(--primary-color) !important;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-hover) !important;
+            border-color: var(--primary-hover) !important;
+        }
+        
+        .text-primary {
+            color: var(--primary-color) !important;
+        }
+        
+        .border-primary {
+            border-color: var(--primary-color) !important;
+        }
+        
+        .btn-outline-primary {
+            border-color: var(--primary-color) !important;
+            color: var(--primary-color) !important;
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: var(--primary-color) !important;
+            color: #fff !important;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .input-group-dynamic {
+            margin-bottom: 1rem;
+        }
+        
+        .card label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #344767;
+        }
+        
+        .card .form-control {
+            border-bottom: 1px solid #d2d6da;
+            border-radius: 0.375rem;
+            padding: 0.5rem 0.75rem;
+        }
+        
+        .card textarea.form-control {
+            min-height: 100px;
+        }
+        
+        /* Car preview styling */
+        .car-preview {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            padding: 20px;
+            color: white;
+            margin-top: 20px;
+        }
+        
+        .car-icon {
+            font-size: 4rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 15px;
+        }
+        
+        .car-detail {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .car-detail:last-child {
+            border-bottom: none;
+        }
+        
+        .car-detail-label {
+            font-weight: 600;
+            opacity: 0.9;
+        }
+        
+        .car-detail-value {
+            font-weight: 500;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+<body class="g-sidenav-show bg-gray-100">
+    <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-radius-lg fixed-start ms-2 bg-white my-2" id="sidenav-main">
+        <div class="sidenav-header">
+            <i class="fas fa-times p-3 cursor-pointer text-dark opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
+            <a class="navbar-brand px-4 py-3 m-0">
+                <img src="{{ asset('assetlog/img/logos/logo-to-event.png') }}" style="max-width: 100%; height: auto; max-height: 45px; object-fit: contain;" alt="logo">
+            </a>
+        </div>
+        <hr class="horizontal dark mt-0 mb-2">
+
+        <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link text-dark {% if app.request.get('_route') == 'dashboard' %}active bg-gradient-dark text-white{% endif %}" href="{{ path('dashboard') }}">
+                        <i class="material-symbols-rounded opacity-5">dashboard</i>
+                        <span class="nav-link-text ms-1">Tableau de bord</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark {% if app.request.get('_route') starts with 'app_user_' %}active bg-gradient-dark text-white{% endif %}" href="{{ path('app_user_index') }}">
+                        <i class="material-symbols-rounded opacity-5">people</i>
+                        <span class="nav-link-text ms-1">Gestion Utilisateurs</span>
+                    </a>
+                </li>
+             
+                <li class="nav-item">
+                    <a class="nav-link text-dark {% if app.request.get('_route') starts with 'app_car_' %}active bg-gradient-dark text-white{% endif %}" href="{{ path('app_car_index') }}">
+                        <i class="material-symbols-rounded opacity-5">directions_car</i>
+                        <span class="nav-link-text ms-1">Gestion Cars</span>
+                    </a>
+                </li>
+                
+                
+                <li class="nav-item mt-3">
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-dark font-weight-bolder opacity-5">Pages du compte</h6>
+                </li>
+                <li class="nav-item">
+                        <i class="material-symbols-rounded opacity-5">person</i>
+                        <span class="nav-link-text ms-1">Profil</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="sidenav-footer position-absolute w-100 bottom-0">
+            <div class="mx-3">
+                <a class="btn btn-outline-dark mt-4 w-100" href="#" type="button">Contacter Nous</a>
+            </div>
+        </div>
+    </aside>
+    
+    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
+        <!-- Navbar -->
+        <nav class="navbar navbar-main navbar-expand-lg px-0 mx-3 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
+            <div class="container-fluid py-1 px-3">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+                        <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="{{ path('app_car_index') }}">Cars</a></li>
+                        <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Create New Car</li>
+                    </ol>
+                </nav>
+                <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+                    <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                        <div class="input-group input-group-outline">
+                            <label class="form-label">Search cars...</label>
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <ul class="navbar-nav d-flex align-items-center justify-content-end">
+                        <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+                            <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
+                                <div class="sidenav-toggler-inner">
+                                    <i class="sidenav-toggler-line"></i>
+                                    <i class="sidenav-toggler-line"></i>
+                                    <i class="sidenav-toggler-line"></i>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown pe-3 d-flex align-items-center">
+                            <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="material-symbols-rounded">notifications</i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
+                                <li class="mb-2">
+                                    <a class="dropdown-item border-radius-md" href="javascript:;">
+                                        <div class="d-flex py-1">
+                                            <div class="my-auto">
+                                                <img src="{{ asset('assetad/img/team-2.jpg') }}" class="avatar avatar-sm me-3">
+                                            </div>
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="text-sm font-weight-normal mb-1">
+                                                    <span class="font-weight-bold">New message</span> from Laur
+                                                </h6>
+                                                <p class="text-xs text-secondary mb-0">
+                                                    <i class="fa fa-clock me-1"></i>
+                                                    13 minutes ago
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item d-flex align-items-center">
+                            <a href="" class="nav-link text-body font-weight-bold px-0">
+                                <i class="material-symbols-rounded">logout</i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- End Navbar -->
+        
+        <div class="container-fluid py-4">
+            <div class="row">
+                <!-- Form Card -->
+                <div class="col-12">
+                    <div class="card my-4">
+                        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                            <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                                <h6 class="text-white text-capitalize ps-3">Create New Car</h6>
+                            </div>
+                        </div>
+                        <div class="card-body px-4 pb-2">
+                            <div class="row">
+                                <!-- Form Column -->
+                                <div class="col-md-7">
+                                    <!-- Car Form -->
+                                    {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'class': 'mt-3'}}) }}
+                                    
+                                    <div class="form-group">
+                                        {{ form_label(form.description, "Description", {'label_attr': {'class': 'control-label'}}) }}
+                                        {{ form_widget(form.description, {'attr': {'class': 'form-control', 'rows': 4, 'oninput': 'updateCarPreview()'}}) }}
+                                        <div class="text-danger">
+                                            {{ form_errors(form.description) }}
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                {{ form_label(form.mark, "Mark", {'label_attr': {'class': 'control-label'}}) }}
+                                                {{ form_widget(form.mark, {'attr': {'class': 'form-control', 'oninput': 'updateCarPreview()'}}) }}
+                                                <div class="text-danger">
+                                                    {{ form_errors(form.mark) }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                {{ form_label(form.model, "Model", {'label_attr': {'class': 'control-label'}}) }}
+                                                {{ form_widget(form.model, {'attr': {'class': 'form-control', 'oninput': 'updateCarPreview()'}}) }}
+                                                <div class="text-danger">
+                                                    {{ form_errors(form.model) }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        {{ form_label(form.matrucule, "Matricule", {'label_attr': {'class': 'control-label'}}) }}
+                                        {{ form_widget(form.matrucule, {'attr': {'class': 'form-control', 'oninput': 'updateCarPreview()'}}) }}
+                                        <div class="text-danger">
+                                            {{ form_errors(form.matrucule) }}
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row mt-4">
+                                        <div class="col-12 d-flex justify-content-between">
+                                            <a href="{{ path('app_car_indexad') }}" class="btn btn-outline-dark">Back to List</a>
+                                            <button type="submit" class="btn bg-gradient-primary">Create Car</button>
+                                        </div>
+                                    </div>
+                                    
+                                    {{ form_end(form) }}
+                                    <!-- End Car Form -->
+                                </div>
+                                
+                                <!-- Car Preview Column -->
+                                <div class="col-md-5">
+                                    <div class="card mt-3">
+                                        <div class="card-header p-3">
+                                            <h6 class="mb-0">Car Preview</h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="car-preview">
+                                                <div class="text-center">
+                                                    <i class="material-symbols-rounded car-icon">directions_car</i>
+                                                    <h5 id="preview-title">New Car</h5>
+                                                </div>
+                                                
+                                                <div class="car-detail">
+                                                    <span class="car-detail-label">Mark:</span>
+                                                    <span class="car-detail-value" id="preview-mark">-</span>
+                                                </div>
+                                                
+                                                <div class="car-detail">
+                                                    <span class="car-detail-label">Model:</span>
+                                                    <span class="car-detail-value" id="preview-model">-</span>
+                                                </div>
+                                                
+                                                <div class="car-detail">
+                                                    <span class="car-detail-label">Matricule:</span>
+                                                    <span class="car-detail-value" id="preview-matricule">-</span>
+                                                </div>
+                                                
+                                                <div class="car-detail">
+                                                    <span class="car-detail-label">Description:</span>
+                                                    <span class="car-detail-value" id="preview-description">-</span>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="mt-3">
+                                                <p class="text-sm text-secondary text-center">This preview shows how your car information will be displayed</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <footer class="footer py-4">
+                <div class="container-fluid">
+                    <div class="row align-items-center justify-content-lg-between">
+                        <div class="col-lg-6 mb-lg-0 mb-4">
+                            <div class="copyright text-center text-sm text-muted text-lg-start">
+                                © {{ "now"|date("Y") }},
+                                Car Management System
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <ul class="nav nav-footer justify-content-center justify-content-lg-end">
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link text-muted">About Us</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link text-muted">Blog</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link text-muted">License</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </main>
+</body>
+{% endblock %}
+
+{% block javascripts %}
+    <!-- Material Dashboard JS -->
+    <script src="{{ asset('assetad/js/core/popper.min.js') }}"></script>
+    <script src="{{ asset('assetad/js/core/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assetad/js/plugins/perfect-scrollbar.min.js') }}"></script>
+    <script src="{{ asset('assetad/js/plugins/smooth-scrollbar.min.js') }}"></script>
+    
+    <script>
+        var win = navigator.platform.indexOf('Win') > -1;
+        if (win && document.querySelector('#sidenav-scrollbar')) {
+            var options = {
+                damping: '0.5'
+            };
+            Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+        }
+        
+        function updateCarPreview() {
+            // Get form values
+            const mark = document.getElementById('car_mark').value || '-';
+            const model = document.getElementById('car_model').value || '-';
+            const matricule = document.getElementById('car_matrucule').value || '-';
+            const description = document.getElementById('car_description').value || '-';
+            
+            // Update preview
+            document.getElementById('preview-mark').textContent = mark;
+            document.getElementById('preview-model').textContent = model;
+            document.getElementById('preview-matricule').textContent = matricule;
+            document.getElementById('preview-description').textContent = description;
+            
+            // Update title
+            if (mark !== '-' && model !== '-') {
+                document.getElementById('preview-title').textContent = mark + ' ' + model;
+            } else {
+                document.getElementById('preview-title').textContent = 'New Car';
+            }
+        }
+        
+        // Initialize preview on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCarPreview();
+        });
+    </script>
+{% endblock %}

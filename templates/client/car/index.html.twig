@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Car index{% endblock %}
+
+{% block body %}
+    <h1>Car index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id_car</th>
+                <th>Description</th>
+                <th>Mark</th>
+                <th>Model</th>
+                <th>Matrucule</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for car in cars %}
+            <tr>
+                <td>{{ car.id_Car }}</td>
+                <td>{{ car.description }}</td>
+                <td>{{ car.mark }}</td>
+                <td>{{ car.model }}</td>
+                <td>{{ car.matrucule }}</td>
+                <td>
+                    <a href="{{ path('app_car_show', {'id_car': car.id_car}) }}">show</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
